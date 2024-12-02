@@ -1,4 +1,4 @@
-package suporte.techne.flightapp.domain.countries;
+package suporte.techne.flightapp.domain.country;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

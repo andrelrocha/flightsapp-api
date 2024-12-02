@@ -1,10 +1,10 @@
 CREATE TABLE users (
-    id CHAR(36) PRIMARY KEY,
+    id UUID PRIMARY KEY,
     login VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL,
     username VARCHAR(20) UNIQUE,
     name VARCHAR(100),
-    country_id CHAR(36),
+    country_id UUID REFERENCES countries(id),
     socialNumber VARCHAR(30) UNIQUE,
     role VARCHAR(100) NOT NULL,
     phone VARCHAR(14),
@@ -18,6 +18,18 @@ CREATE TABLE users (
     two_factor_enabled BOOLEAN DEFAULT FALSE,
     refresh_token_enabled BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    CONSTRAINT fk_country FOREIGN KEY (country_id) REFERENCES countries(id)
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE OR REPLACE FUNCTION update_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER update_user_timestamp
+    BEFORE UPDATE ON users
+    FOR EACH ROW
+    EXECUTE FUNCTION update_timestamp();

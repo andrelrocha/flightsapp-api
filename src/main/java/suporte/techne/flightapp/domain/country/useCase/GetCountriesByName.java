@@ -1,9 +1,9 @@
-package suporte.techne.flightapp.domain.countries.useCase;
+package suporte.techne.flightapp.domain.country.useCase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import suporte.techne.flightapp.domain.countries.CountryRepository;
-import suporte.techne.flightapp.domain.countries.DTO.CountryReturnDTO;
+import suporte.techne.flightapp.domain.country.CountryRepository;
+import suporte.techne.flightapp.domain.country.DTO.CountryReturnDTO;
 
 import java.util.List;
 

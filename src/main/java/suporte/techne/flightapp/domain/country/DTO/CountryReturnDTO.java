@@ -1,6 +1,6 @@
-package suporte.techne.flightapp.domain.countries.DTO;
+package suporte.techne.flightapp.domain.country.DTO;
 
-import suporte.techne.flightapp.domain.countries.Country;
+import suporte.techne.flightapp.domain.country.Country;
 
 import java.util.UUID;
 

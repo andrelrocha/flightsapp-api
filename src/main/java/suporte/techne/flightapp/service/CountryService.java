@@ -2,7 +2,7 @@ package suporte.techne.flightapp.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import suporte.techne.flightapp.domain.countries.DTO.CountryReturnDTO;
+import suporte.techne.flightapp.domain.country.DTO.CountryReturnDTO;
 
 import java.util.List;
 

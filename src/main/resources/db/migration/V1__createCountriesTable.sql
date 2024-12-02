@@ -1,5 +1,5 @@
 CREATE TABLE countries (
-    id CHAR(36) PRIMARY KEY,
+    id UUID PRIMARY KEY,
     name VARCHAR(50),
     iso_code VARCHAR(3)
 )

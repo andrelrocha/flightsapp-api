@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Table(name = "users")
 @Entity(name = "User")
@@ -23,8 +24,9 @@ import java.util.List;
 @EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
     @Id
-    @Column(name = "id", columnDefinition = "CHAR(36)")
-    private String id;
+    @GeneratedValue(generator = "uuid2")
+    @Column(name = "id")
+    private UUID id;
 
     @Column(name = "login", nullable = false, length = 100)
     private String login;
@@ -42,7 +44,7 @@ public class User implements UserDetails {
     @JoinColumn(name = "country_id", referencedColumnName = "id")
     private Country country;
 
-    @Column(name = "socialNumber", unique = true, length = 30)
+    @Column(name = "social_number", unique = true, length = 30)
     private String socialNumber;
 
     @Column(name = "role", nullable = false, length = 100)
@@ -178,5 +180,9 @@ public class User implements UserDetails {
 
     public boolean isRefreshTokenEnabled() {
         return this.refreshTokenEnabled;
+    }
+
+    public boolean isTwoFactorEnabled() {
+        return this.twoFactorEnabled;
     }
 }

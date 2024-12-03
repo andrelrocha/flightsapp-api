@@ -12,23 +12,21 @@ import java.util.UUID;
 public record UserDTO(@Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "O endereço de e-mail não é válido")
                       @NotNull
                       String login,
-                      @Size(min = 8, message = "A senha deve ter pelo menos 8 caracteres")
-                      @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d).*$", message = "A senha deve conter pelo menos uma letra maiúscula e um número")
+                      @Size(min = 8, message = "Password must have at least 8 characters")
+                      @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d).*$", message = "The password must have at least one upper letter and a number")
                       @NotNull
                       String password,
                       @NotNull String name,
                       String socialNumber,
                       String phone,
-                      @JsonFormat(pattern = "dd/MM/yyyy")
-                      @DateTimeFormat(pattern = "dd/MM/yyyy")
+                      @JsonFormat(pattern = "yyyy-MM-dd")
+                      @DateTimeFormat(pattern = "yyyy-MM-dd")
                       LocalDate birthday,
                       UUID countryId,
                       @NotNull
-                      @Size(max = 20, message = "O nome de usuário deve ter no máximo 20 caracteres")
+                      @Size(max = 20, message = "Username max length is 20 characters")
                       String username,
-
                       Boolean twoFactorEnabled,
                       Boolean refreshTokenEnabled,
-
                       String theme) {
 }

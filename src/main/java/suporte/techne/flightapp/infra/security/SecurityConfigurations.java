@@ -35,6 +35,7 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(HttpMethod.GET, "/infra/ping").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/countries/**").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "/auth/**").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/utils/admin/**").hasRole("ADMIN");
                     req.anyRequest().authenticated();
                 })

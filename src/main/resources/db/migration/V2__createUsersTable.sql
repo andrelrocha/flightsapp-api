@@ -5,7 +5,7 @@ CREATE TABLE users (
     username VARCHAR(20) UNIQUE,
     name VARCHAR(100),
     country_id UUID REFERENCES countries(id),
-    socialNumber VARCHAR(30) UNIQUE,
+    social_number VARCHAR(30) UNIQUE,
     role VARCHAR(100) NOT NULL,
     phone VARCHAR(14),
     birthday DATE,

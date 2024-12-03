@@ -65,11 +65,11 @@ public class User implements UserDetails {
     @Column(name = "token_mail")
     private String tokenMail;
 
-    @Column(name = "access_failed_count")
-    private Integer accessFailedCount;
+    @Column(name = "access_failed_count", columnDefinition = "INTEGER DEFAULT 0")
+    private Integer accessFailedCount = 0;
 
-    @Column(name = "lockout_enabled")
-    private Boolean lockoutEnabled;
+    @Column(name = "lockout_enabled", columnDefinition = "BOOLEAN DEFAULT false")
+    private Boolean lockoutEnabled = false;
 
     @Column(name = "lockout_end")
     private LocalDateTime lockoutEnd;

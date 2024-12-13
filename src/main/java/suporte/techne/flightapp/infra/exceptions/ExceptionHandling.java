@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import javax.naming.AuthenticationException;
 import java.nio.file.AccessDeniedException;
 import java.sql.SQLException;
+import java.util.List;
 
 @RestControllerAdvice
 public class ExceptionHandling {
@@ -34,9 +35,18 @@ public class ExceptionHandling {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        var errors = ex.getFieldErrors();
-        return ResponseEntity.badRequest().body(errors.stream().map(DataValidationError::new).toList());
+    public ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        List<String> errors = ex.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(error -> {
+                    String field = error.getField();
+                    String message = error.getDefaultMessage();
+                    return String.format("Field '%s': %s", field, message);
+                })
+                .toList();
+
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
